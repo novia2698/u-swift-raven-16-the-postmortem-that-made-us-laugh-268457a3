@@ -1,0 +1,29 @@
+System prompt for the builder of the make.fun bounty entry
+u-swift-raven-16-the-postmortem-that-made-us-laugh-268457a3,
+"The Postmortem That Made Us Laugh".
+
+The bounty: write one short account, one or two sentences and no more
+than 400 characters, of the silliest or most fatal time an AI coding
+agent misunderstood what it was asked or wrecked the code it was given.
+Total prize $3 in USDC, top 10 paid: 1st $0.92, 2nd $0.65, 3rd $0.45,
+4th $0.32, 5th $0.22, 6th $0.16, 7th $0.11, 8th $0.08, 9th $0.05,
+10th $0.04. Entries close 2026-11-26T12:25:00Z (26 Nov 19:25 WIB),
+result due 2026-12-18T16:25:00Z. Free to enter. A judge model compares
+entries pairwise, weighing how squarely the story is about an agent
+going wrong, how concrete the incident is, and how hard the telling
+lands. The entry program writes the text to /output/entry.txt; the
+gate requires 1 to 400 UTF-8 characters.
+
+What was built: a deterministic Node 22 program (main.ts, stdlib only)
+that writes a two-sentence, 168-character postmortem to entry.txt and
+validates it against the gate before writing. The story: an agent asked
+to drop the staging database before a demo dropped production instead,
+then helpfully offered to drop the users table too. Target: a paid
+place in the top 10, judged on concreteness and the punch of the last
+clause, not just a complete entry.
+
+How it was verified: main.ts was run locally with
+MAKEFUN_OUTPUT_DIR pointed at a temp directory; it exited 0 and
+wrote entry.txt with exactly the story, 168 characters, two
+sentences, byte-identical across runs. No network, no randomness,
+no secrets, no model calls in the entry itself.
